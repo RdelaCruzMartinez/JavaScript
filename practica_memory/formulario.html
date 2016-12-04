@@ -7,11 +7,12 @@
     <!-- Temas opcionales-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <!-- Estilos propios fuera de Bootstrap-->
+    <link rel="stylesheet" href="estilos.css" type="text/css">
+
     <!-- JavaScript opcional -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <!--Lógica del juego-->
-    <script src="memorion.js"></script>
     <meta charset="UTF-8">
     <title>Memorion Demo</title>
 </head>
@@ -27,25 +28,62 @@
      </div>
 
         <div class="row">
-            <form data-toggle="validator" action="" method="">
-                <div class="form-group col-sm-4 col-xs-4">
-                    <label for="correo"> Correo: </label>
-                    <input type="email"  id="correo" name="correo" class="form-control" required/>
-                </div>
-                <div class="form-group col-md-4 col-xs-4">
-                    <label for="numeroUno">Primer número</label>
-                    <input type="number" id="numeroUno" min="0" max="10" class="form-control" required/>
-                </div>
-                <div class="form-group col-md-4 col-xs-4">
-                    <label for="numeroDos">Segundo número</label>
-                    <input type="number" id="numeroDos" min="0" max="10" class="form-control" required/>
-                </div>
-                <div class="form-group">
-                    <input type="submit" id="enviar" min="0" class="btn btn-success pull-right" value="enviar"/>
-                </div>
-            </form>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form  id="formulario" action="" method="">
+                        <div class="form-group col-sm-4 col-xs-4">
+                            <label for="correo">
+                                <span>Correo:</span>
+                                <input type="email"  id="correo" name="correo" class="form-control"  minlength="3" required/>
+                                <ul class="requerimientos">
+                                    <li>Debe contener como minimo 3 carácteres</li>
+                                    <li>Solo puede contener letras y números</li>
+                                    <li>Debe contener informacion sobre el dominio: @dominio</li>
+                                    <li>Debe acabar en una direccion valida: .com, .es, .org</li>
+                                </ul>
+                            </label>
+                        </div>
+
+                        <div class="col-sm-3 col-xs-4">
+                            <label for="numeroUno">
+                                <span>Primer número:</span>
+                                <input type="number" id="numeroUno" min="0" max="10" maxlength="2" minlength="1" class="form-control" required/>
+                                <ul class="requerimientos">
+                                    <li>Entre 1 y 2 carácteres</li>
+                                    <li>El número no puede ser mayo que 10</li>
+                                    <li>Solo números enteros</li>
+                                    <li>Solo números positivoa</li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="col-md-4 col-xs-4">
+                            <label for="numeroDos">
+                            <span>Segundo número:</span>
+                            <input type="number" id="numeroDos" min="0" max="10" maxlength="2" minlength="1" class="form-control" required/>
+                                <ul class="requerimientos">
+                                    <li>Entre 1 y 2 carácteres</li>
+                                    <li>El número no puede ser mayo que 10</li>
+                                    <li>Solo números enteros</li>
+                                    <li>Solo números positivoa</li>
+                                </ul>
+                             </label>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-12">
+                                <div class="buttons">
+                                    <input type="submit" id="enviar" class="btn btn-success pull-right" value="Enviar"/>
+                                    <input type="reset" in="borrar" class="btn btn-danger pull-right" value="Borrar">
+                                </div>
+                            </div>
+                        </div>
+                 </form>
+              </div>
+            </div>
         </div>
 </div>
+<!--Validación del formulario y lógica del juego-->
+<script src="memorion.js"></script>
 </div>
 </body>
 </html>

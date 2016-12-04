@@ -1,0 +1,48 @@
+
+
+.requerimientos {
+    font-size: 1.3rem;
+    font-style: italic;
+    text-align: left;
+    list-style: disc;
+    list-style-position: inside;
+    max-width: 400px;
+    margin: 10px auto;
+    color: rgb(150,150,150);
+}
+
+
+.requerimientos li.invalid {
+    color: #e74c3c;
+}
+.requerimientos li.valid {
+    color: #2ecc71;
+}
+
+.requerimientos li.valid:after {
+    display: inline-block;
+    padding-left: 10px;
+    content: "\2713";
+}
+
+
+/*Personalizado ------------------ */
+
+input:not([type="submit"]):valid {
+    border-color: #2ecc71;
+}
+
+/* Esconder y enseñar validación */
+
+input:not([type="submit"]) + .requerimientos {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 1s ease-out;
+}
+
+input:not([type="submit"]):hover + .requerimientos,
+input:not([type="submit"]):focus + .requerimientos,
+input:not([type="submit"]):active + .requerimientos {
+    max-height: 1000px; /* any large number (bigger then the .input-requirements list) */
+    transition: max-height 1s ease-in;
+}
