@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Temas opcionales-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- JavaScript opcional -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!--Lógica del juego-->
+    <script src="memorion.js"></script>
+    <meta charset="UTF-8">
+    <title>Memorion Demo</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel default col-md-5 offset-md-4">
+                <h2> Memorión Demo</h2>
+                <p>Resumen</p>
+            </div>
+        </div>
+     </div>
+
+        <div class="row">
+            <form data-toggle="validator" action="" method="">
+                <div class="form-group col-sm-4 col-xs-4">
+                    <label for="correo"> Correo: </label>
+                    <input type="email"  id="correo" name="correo" class="form-control" required/>
+                </div>
+                <div class="form-group col-md-4 col-xs-4">
+                    <label for="numeroUno">Primer número</label>
+                    <input type="number" id="numeroUno" min="0" max="10" class="form-control" required/>
+                </div>
+                <div class="form-group col-md-4 col-xs-4">
+                    <label for="numeroDos">Segundo número</label>
+                    <input type="number" id="numeroDos" min="0" max="10" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" id="enviar" min="0" class="btn btn-success pull-right" value="enviar"/>
+                </div>
+            </form>
+        </div>
+</div>
+</div>
+</body>
+</html>
