@@ -21,8 +21,8 @@ Validacion.prototype = {
             if (noValido) {
                 //Si no valido es true añadimos los mensajes de invalidez al array y marcamos el elemento con la clase invalid.
                 this.agregarInavalido(this.comprobacionesDeValidez[i].mensajesInvalidez);
-                this.comprobacionesDeValidez[i].elemento.classList.add('invalid');
                 this.comprobacionesDeValidez[i].elemento.classList.remove('valid');
+                this.comprobacionesDeValidez[i].elemento.classList.add('invalid');
             } else {
                 this.comprobacionesDeValidez[i].elemento.classList.remove('invalid');
                 this.comprobacionesDeValidez[i].elemento.classList.add('valid');
@@ -43,7 +43,8 @@ var comprobacionCorreo = [
     },
     {
         noValido: function (input) {
-            var caracteresNoPermitidos = input.value.match(/[^a-zA-Z0-9]/g);
+            //TODO documentar la expresión regular
+            var caracteresNoPermitidos =! input.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g);
             //Si se cumple caracteresPermitidos devuelve True si no False.
             return caracteresNoPermitidos ? true : false;
         },
@@ -55,23 +56,23 @@ var comprobacionCorreo = [
 var comprobacionPrimerNumero = [
     {
         noValido: function (input) {
-            return input.value.length > 2;
+            return input.value.length > 1;
         },
-        mensajesInvalidez: 'El número debe solo puede ser entre 1 y 2 carácteres',
+        mensajesInvalidez: 'El número debe tener solo un carácter',
         elemento: document.querySelector('label[for="numeroUno"] li:nth-child(1)')
     },
     {
         noValido: function (input) {
             return input.value < 1.5;
         },
-        mensajesInvalidez: 'El numero debe ser mayo que 1',
+        mensajesInvalidez: 'El numero debe ser mayor que 1',
         elemento: document.querySelector('label[for="numeroUno"] li:nth-child(2)')
     },
     {
         noValido: function (input) {
-            return input.value > 10;
+            return input.value > 6;
         },
-        mensajesInvalidez: 'El número no puede ser mayo que 10',
+        mensajesInvalidez: 'El número debe ser menor que 7',
         elemento: document.querySelector('label[for="numeroUno"] li:nth-child(3)')
     },
     {
@@ -80,14 +81,6 @@ var comprobacionPrimerNumero = [
         },
         mensajesInvalidez: 'El primer número debe ser par',
         elemento: document.querySelector('label[for="numeroUno"] li:nth-child(4)')
-    },
-    {
-        noValido: function (input) {
-            return input.value < 0.5;
-        },
-        mensajesInvalidez: 'Solo numeros positivos',
-        elemento: document.querySelector('label[for="numeroUno"] li:nth-child(5)')
-
     }
 ];
 
@@ -96,30 +89,22 @@ var comprobacionSegundoNumero = [
         noValido: function (input) {
             return input.value.length > 2;
         },
-        mensajesInvalidez: 'El número debe solo puede ser entre 1 y 2 carácteres',
+        mensajesInvalidez: 'El número debe tener solo un carácter',
         elemento: document.querySelector('label[for="numeroDos"] li:nth-child(1)')
     },
     {
         noValido: function (input) {
-            return input.value < 0.5;
+            return input.value < 1.5;
         },
-        mensajesInvalidez: 'El numero debe ser mayo que 1',
+        mensajesInvalidez: 'El numero debe ser mayor que 1',
         elemento: document.querySelector('label[for="numeroDos"] li:nth-child(2)')
     },
     {
         noValido: function (input) {
-            return input.value > 10;
+            return input.value > 6;
         },
-        mensajesInvalidez: 'El número no puede ser mayo que 10',
+        mensajesInvalidez: 'El número debe ser menor que 7',
         elemento: document.querySelector('label[for="numeroDos"] li:nth-child(3)')
-    },
-    {
-        noValido: function (input) {
-            return input.value < 0.5;
-        },
-        mensajesInvalidez: 'Solo numeros positivos',
-        elemento: document.querySelector('label[for="numeroDos"] li:nth-child(4)')
-
     }
 ];
 

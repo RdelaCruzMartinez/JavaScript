@@ -38,9 +38,7 @@
                                 <input type="email"  id="correo" name="correo" class="form-control"  minlength="3" required/>
                                 <ul class="requerimientos">
                                     <li>Debe contener como minimo 3 carácteres</li>
-                                    <li>Solo puede contener letras y números</li>
-                                    <li>Debe contener informacion sobre el dominio: @dominio</li>
-                                    <li>Debe acabar en una direccion valida: .com, .es, .org</li>
+                                    <li>Debe seguir el patrón = ejemplo@mail.es</li>
                                 </ul>
                             </label>
                         </div>
@@ -48,25 +46,23 @@
                         <div class="col-sm-3 col-xs-4">
                             <label for="numeroUno">
                                 <span>Primer número:</span>
-                                <input type="number" id="numeroUno" min="0" max="10" maxlength="2" minlength="1" class="form-control" required/>
+                                <input type="number" id="numeroUno" min="0" max="6" maxlength="1" minlength="1" class="form-control" required/>
                                 <ul class="requerimientos">
-                                    <li>Entre 1 y 2 carácteres</li>
+                                    <li>Solo un carácter</li>
                                     <li>El número debe ser mayor que 1</li>
-                                    <li>El número no puede ser mayo que 10</li>
+                                    <li>El número debe ser menor que 7</li>
                                     <li>El primer número debe ser par</li>
-                                    <li>Solo números positivos</li>
                                 </ul>
                             </label>
                         </div>
                         <div class="col-md-4 col-xs-4">
                             <label for="numeroDos">
                             <span>Segundo número:</span>
-                            <input type="number" id="numeroDos" min="0" max="10" maxlength="2" minlength="1" class="form-control" required/>
+                            <input type="number" id="numeroDos" min="0" max="6" maxlength="1" minlength="1" class="form-control" required/>
                                 <ul class="requerimientos">
-                                    <li>Entre 1 y 2 carácteres</li>
-                                    <li>El número debe ser mayo que 0</li>
-                                    <li>El número no puede ser mayo que 10</li>
-                                    <li>Solo números positivos</li>
+                                    <li>Solo un carácter</li>
+                                    <li>El número debe ser mayor que 1</li>
+                                    <li>El número debe ser menor que 7</li>
                                 </ul>
                              </label>
                         </div>
