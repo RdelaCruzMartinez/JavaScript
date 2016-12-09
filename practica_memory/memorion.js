@@ -1,37 +1,74 @@
 
-//array para guardar los mensajes de error
-function Validacion() {
+function Validacion(input) {
+    //array para guardar los mensajes de error y sobreescribir los de html
     this.invalidos = [];
+    //array para guardar los checks de validez de cada campo
     this.comprobacionesDeValidez = [];
+
+    //add reference to the input node
+    this.inputNode = input;
+
+    //trigger method to attach the listener
+    this.registerListener();
 }
 
 Validacion.prototype = {
-    agregarInavalido: function (mensaje) {
+    agregarInavalido: function(mensaje) {
         this.invalidos.push(mensaje);
     },
     devolverInvalido: function() {
         return this.invalidos.join('. \n');
     },
     comprobarValidez: function(input) {
-
         //Iteramos sombre todas las condiciones de los input.
-        for (var i = 0; i < this.comprobacionesDeValidez.length; i++) {
+        for ( var i = 0; i < this.comprobacionesDeValidez.length; i++ ) {
 
             var noValido = this.comprobacionesDeValidez[i].noValido(input);
             if (noValido) {
                 //Si no valido es true añadimos los mensajes de invalidez al array y marcamos el elemento con la clase invalid.
                 this.agregarInavalido(this.comprobacionesDeValidez[i].mensajesInvalidez);
-                this.comprobacionesDeValidez[i].elemento.classList.remove('valid');
-                this.comprobacionesDeValidez[i].elemento.classList.add('invalid');
-            } else {
-                this.comprobacionesDeValidez[i].elemento.classList.remove('invalid');
-                this.comprobacionesDeValidez[i].elemento.classList.add('valid');
+            }
+
+            var elementoRequerido = this.comprobacionesDeValidez[i].elemento;
+
+            if (elementoRequerido) {
+                if (noValido) {
+                    elementoRequerido.classList.add('invalid');
+                    elementoRequerido.classList.remove('valid');
+                } else {
+                    elementoRequerido.classList.remove('invalid');
+                    elementoRequerido.classList.add('valid');
+                }
+
             }
         }
+    },
+    comprobarEntrada: function() {
+
+        this.inputNode.Validacion.invalidos = [];
+        this.comprobarValidez(this.inputNode);
+
+        if ( this.inputNode.Validacion.invalidos.length === 0 && this.inputNode.value !== '' ) {
+            this.inputNode.setCustomValidity('');
+        } else {
+            var mensaje = this.inputNode.Validacion.devolverInvalido();
+            this.inputNode.setCustomValidity(mensaje);
+        }
+    },
+    registerListener: function() {
+
+        var Validacion = this;
+
+        this.inputNode.addEventListener('keyup', function() {
+            Validacion.comprobarEntrada();
+        });
+
+
     }
+
 };
 
-//array para todos los checks  de validacioón.
+//array para todos los checks de validación de correo.
 var comprobacionCorreo = [
     {
         noValido: function (input) {
@@ -43,7 +80,6 @@ var comprobacionCorreo = [
     },
     {
         noValido: function (input) {
-            //TODO documentar la expresión regular
             var caracteresNoPermitidos =! input.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g);
             //Si se cumple caracteresPermitidos devuelve True si no False.
             return caracteresNoPermitidos ? true : false;
@@ -53,6 +89,7 @@ var comprobacionCorreo = [
     },
 ];
 
+//array para todos los checks de validación del primer número.
 var comprobacionPrimerNumero = [
     {
         noValido: function (input) {
@@ -84,6 +121,7 @@ var comprobacionPrimerNumero = [
     }
 ];
 
+//array para todos los checks de validación del segundo número.
 var comprobacionSegundoNumero = [
     {
         noValido: function (input) {
@@ -108,28 +146,36 @@ var comprobacionSegundoNumero = [
     }
 ];
 
-//Recuperamos la información de los inputs y le asignamos la propiedad de validación.
+//Recuperamos la información de los inputs y le asignamos la propiedad de validación pasandole la propia información del campo.
 var correoInput = document.getElementById('correo');
 var numeroUnoInput = document.getElementById('numeroUno');
 var numeroDosInput = document.getElementById('numeroDos');
 
-correoInput.Validacion = new Validacion();
+correoInput.Validacion = new Validacion(correoInput);
 correoInput.Validacion.comprobacionesDeValidez = comprobacionCorreo;
 
-numeroUnoInput.Validacion = new Validacion();
+numeroUnoInput.Validacion = new Validacion(numeroUnoInput);
 numeroUnoInput.Validacion.comprobacionesDeValidez = comprobacionPrimerNumero;
 
-numeroDosInput.Validacion = new Validacion();
+numeroDosInput.Validacion = new Validacion(numeroDosInput);
 numeroDosInput.Validacion.comprobacionesDeValidez = comprobacionSegundoNumero;
 
 
+
+
+
 // Se recuperan todos los inputs del formulario
-var respuestasDelFormulario =  document.querySelectorAll('input:not([type="submit"])');
-//Se itera sobre ellos y a cada uno se le añade un "listener" y se ejecuta la validación.
-for  (var i = 0; i < respuestasDelFormulario.length; i++) {
-    respuestasDelFormulario[i].addEventListener('keyup', function () {
-        this.Validacion.comprobarValidez(this);
-    })
+var respuestasDelFormulario = document.querySelectorAll('input:not([type="submit"])');
+
+
+var submit = document.querySelector('input[type="submit"');
+var formulario = document.getElementById('formulario');
+
+function validate() {
+    for (var i = 0; i < respuestasDelFormulario.length; i++) {
+        respuestasDelFormulario[i].Validacion.comprobarEntrada();
+    }
 }
 
-
+submit.addEventListener('click', validate);
+formulario.addEventListener('submit', validate);
